@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo App</title>
+
+    <style>
+        /* Full body background */
+        body {
+            background-color: deepskyblue;
+            margin: 0;
+            padding: 0;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        /* Main box */
+        .container {
+            background: white;
+            padding: 20px 25px;
+            border-radius: 12px;
+            width: 350px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        h2 {
+            margin-bottom: 15px;
+        }
+
+        form {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        input {
+            flex: 1;
+            padding: 10px;
+            border-radius: 6px;
+            border: 1px solid #555;
+            outline: none;
+        }
+
+        button {
+            background-color: blue;
+            color: whitesmoke;
+            height: 35px;
+            width: 70px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: navy;
+        }
+
+        .container2 {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        ul {
+            width: 100%;
+            padding: 0;
+        }
+
+        ul li {
+            list-style: none;
+            background: #f3f3f3;
+            padding: 12px;
+            border-radius: 6px;
+            margin-bottom: 10px;
+            font-size: 16px;
+            color: #444;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .delete-btn {
+            background-color: red;
+            color: white;
+            border: none;
+            padding: 6px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .delete-btn:hover {
+            background-color: darkred;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+    <h2>Enter your tasks</h2>
+
+    <form id="form-id">
+        <input type="text" id="task" placeholder="Task" />
+        <button type="submit">Add</button>
+    </form>
+
+    <div class="container2">
+        <ul id="list"></ul>
+    </div>
+</div>
+
+<script>
+const todoform = document.getElementById('form-id');
+const todotext = document.getElementById('task');
+const todolist = document.getElementById('list');
+
+todoform.addEventListener('submit', function (event) {
+    event.preventDefault();
+
+    const tasktext = todotext.value.trim();
+
+    if (tasktext !== '') {
+        addTodo(tasktext);
+        todotext.value = '';
+    }
+});
+
+function addTodo(tasktext) {
+    const li = document.createElement('li');
+
+    const span = document.createElement('span');
+    span.textContent = tasktext;
+
+    const delBtn = document.createElement('button');
+    delBtn.textContent = "Delete";
+    delBtn.className = "delete-btn";
+
+    // Delete functionality
+    delBtn.addEventListener('click', function () {
+        todolist.removeChild(li);
+    });
+
+    li.appendChild(span);
+    li.appendChild(delBtn);
+
+    todolist.appendChild(li);
+}
+</script>
+
+</body>
+</html>
